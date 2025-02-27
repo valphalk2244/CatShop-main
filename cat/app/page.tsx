@@ -18,15 +18,15 @@ export default function Home() {
               Menu
             </MenubarTrigger>
             <MenubarContent className="bg-gray-800 text-white rounded-md mt-2 shadow-lg">
-              <MenubarItem key="profile">
-                <Link href="/profile" className="hover:bg-gray-700 px-3 py-2 rounded-md block">
-                  Profile
+              <MenubarItem key="login">
+                <Link href="/login" className="hover:bg-gray-700 px-3 py-2 rounded-md block">
+                  login
                 </Link>
               </MenubarItem>
-              <MenubarItem key="shop">
-                <Link href="/shop" className="hover:bg-gray-700 px-3 py-2 rounded-md block">
-                  Shop
-                </Link>
+              <MenubarItem key="register">
+                <Link href="/register" className="hover:bg-gray-700 px-3 py-2 rounded-md block">
+                  regiter
+                </Link> 
               </MenubarItem>
               <MenubarSeparator className="border-gray-700" />
               <MenubarItem key="post">
