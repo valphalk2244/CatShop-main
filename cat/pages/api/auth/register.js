@@ -1,5 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb"
-import { User } from "../../../model/user"
+import User from "@/models/User"
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
@@ -8,20 +8,24 @@ export default async function handler(req, res) {
 
     await connectToDatabase()
 
-    const { username, email, password } = req.body
-    if (!username || !email || !password) {
+    const { username, email, password, gender } = req.body
+    if (!username || !email || !password || !gender) {
         return res.status(400).json({ message: "All fields are required" })
     }
 
+    // ตรวจสอบว่า gender อยู่ในค่า ["male", "female", "other"] หรือไม่
+    const validGenders = ["male", "female", "other"]
+    if (!validGenders.includes(gender)) {
+        return res.status(400).json({ message: "Invalid gender" })
+    }
+
     try {
-        // ตรวจสอบว่า email ถูกใช้ไปแล้วหรือยัง
         const existingUser = await User.findOne({ email })
         if (existingUser) {
             return res.status(400).json({ message: "Email is already in use" })
         }
 
-        // สร้าง User ใหม่
-        const newUser = new User({ username, email, password })
+        const newUser = new User({ username, email, password, gender })
         await newUser.save()
 
         return res.status(201).json({ message: "User registered successfully" })

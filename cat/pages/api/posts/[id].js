@@ -1,5 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb"
-import Post from "../../../model/Post"
+import Post from "../../../models/Post"
 import mongoose from "mongoose"
 
 export default async function handler(req, res) {
